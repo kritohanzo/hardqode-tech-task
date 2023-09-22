@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.urls import include, path
 
+
 urlpatterns = [
     path("v1/", include("v1.urls")),
 ]
