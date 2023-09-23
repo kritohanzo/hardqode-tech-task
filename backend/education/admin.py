@@ -28,6 +28,7 @@ class LessonAdmin(admin.ModelAdmin):
 @admin.register(LessonProduct)
 class LessonProductAdmin(admin.ModelAdmin):
     list_display = ["id", "product", "lesson"]
+    list_display_links = ["id", "product", "lesson"]
     search_fields = ["product", "lesson"]
     empty_value_display = "-"
 
@@ -35,6 +36,7 @@ class LessonProductAdmin(admin.ModelAdmin):
 @admin.register(UserProduct)
 class UserProductAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "product"]
+    list_display_links = ["id", "user", "product"]
     search_fields = ["user", "product"]
     empty_value_display = "-"
 
@@ -49,5 +51,6 @@ class UserLessonAdmin(admin.ModelAdmin):
         "viewed",
         "date_of_last_viewing",
     ]
+    list_display_links = ["id", "user", "lesson"]
     search_fields = ["user", "lesson"]
     empty_value_display = "-"
