@@ -10,6 +10,7 @@ class UserModelConfig(Enum):
     MODEL_VERBOSE_NAME = "Пользователь"
     MODEL_VERBOSE_NAME_PLURAL = "Пользователи"
 
+
 class PruductModelConfig(Enum):
     NAME_MAX_LENGTH = 256
     NAME_VERBOSE_NAME = "Название"
@@ -17,6 +18,7 @@ class PruductModelConfig(Enum):
     OWNER_RELATED_NAME = "owner_products"
     MODEL_VERBOSE_NAME = "Продукт"
     MODEL_VERBOSE_NAME_PLURAL = "Продукты"
+
 
 class LessonModelConfig(Enum):
     NAME_MAX_LENGTH = 256
@@ -26,10 +28,32 @@ class LessonModelConfig(Enum):
     MODEL_VERBOSE_NAME = "Урок"
     MODEL_VERBOSE_NAME_PLURAL = "Уроки"
 
+
+class LessonProductModelConfig(Enum):
+    PRODUCT_VERBOSE_NAME = "Продукт"
+    PRODUCT_RELATED_NAME = "product_lessons"
+    LESSON_VERBOSE_NAME = "Урок"
+    LESSON_RELATED_NAME = "lesson_products"
+    MODEL_VERBOSE_NAME = "Наличие урока в продукте"
+    MODEL_VERBOSE_NAME_PLURAL = "Наличия уроков в продукте"
+
+
 class UserProductModelConfig(Enum):
     USER_VERBOSE_NAME = "Пользователь"
     USER_RELATED_NAME = "user_products"
     PRODUCT_VERBOSE_NAME = "Продукт"
     PRODUCT_RELATED_NAME = "product_users"
     MODEL_VERBOSE_NAME = "Участие пользователя в продукте"
-    MODEL_VERBOSE_NAME_PLURAL = "Участия пользователей в продукте"
+    MODEL_VERBOSE_NAME_PLURAL = "Участия пользователей в продуктах"
+
+
+class UserLessonModelConfig(Enum):
+    USER_VERBOSE_NAME = "Пользователь"
+    USER_RELATED_NAME = "user_lessons"
+    LESSON_VERBOSE_NAME = "Урок"
+    LESSON_RELATED_NAME = "lesson_users"
+    VIEWING_TIME_VERBOSE_NAME = "Время просмотра"
+    VIEWED_VERBOSE_NAME = "Просмотрено"
+    DATE_OF_LAST_VIEWING_VERBOSE_NAME = "Дата последнего просмотра"
+    MODEL_VERBOSE_NAME = "Участие пользователя в уроке"
+    MODEL_VERBOSE_NAME_PLURAL = "Участия пользователей в уроках"
