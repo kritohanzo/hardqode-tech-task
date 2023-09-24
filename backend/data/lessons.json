@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Что такое SQL?",
+        "link_to_video": "https://youtu.be/qwerty",
+        "viewing_duration": 1375
+    },
+    {
+        "id": 2,
+        "name": "SELECT, FROM, WHERE",
+        "link_to_video": "https://youtu.be/qwerty",
+        "viewing_duration": 963
+    },
+    {
+        "id": 3,
+        "name": "Для чего нужно программирование?",
+        "link_to_video": "https://youtu.be/qwerty",
+        "viewing_duration": 1932
+    },
+    {
+        "id": 4,
+        "name": "Базовый синтаксис JS",
+        "link_to_video": "https://youtu.be/qwerty",
+        "viewing_duration": 3876
+    },
+    {
+        "id": 5,
+        "name": "Первое приложение на JS",
+        "link_to_video": "https://youtu.be/qwerty",
+        "viewing_duration": 1789
+    },
+    {
+        "id": 6,
+        "name": "Циклы, ветвления, функции в Python",
+        "link_to_video": "https://youtu.be/qwerty",
+        "viewing_duration": 3589
+    },
+    {
+        "id": 7,
+        "name": "Что такое компилятор и для чего он нужен?",
+        "link_to_video": "https://youtu.be/qwerty",
+        "viewing_duration": 2986
+    }
+]
