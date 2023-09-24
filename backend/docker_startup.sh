@@ -1,6 +1,6 @@
 #!/bin/sh
 python manage.py migrate
-python manage.py import_json -f data/users.json -a users -m Users
+python manage.py import_json -f data/users.json -a users -m User
 python manage.py import_json -f data/products.json -a education -m Product
 python manage.py import_json -f data/lessons.json -a education -m Lesson
 python manage.py import_json -f data/lessons_products.json -a education -m LessonProduct
