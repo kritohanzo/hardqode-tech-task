@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_yasg",
     "rest_framework.authtoken",
     "djoser",
     "users.apps.UsersConfig",
@@ -145,3 +146,5 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 5,
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
+
+SWAGGER_SETTINGS = {"USE_SESSION_AUTH": False}

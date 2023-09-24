@@ -399,7 +399,7 @@ class StatProductAPITest(APITestCase):
         self.assertEqual(
             {
                 "detail": "У вас недостаточно прав "
-                          "для выполнения данного действия."
+                "для выполнения данного действия."
             },
             response.data,
             "Тело ответа API не соответствует документации",
