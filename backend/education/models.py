@@ -72,6 +72,11 @@ class LessonProduct(models.Model):
         verbose_name_plural = (
             LessonProductModelConfig.MODEL_VERBOSE_NAME_PLURAL.value
         )
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "lesson"], name="unique_product_lesson"
+            )
+        ]
 
     def __str__(self):
         return f"{self.lesson} - урок продукта {self.product}"
@@ -96,6 +101,11 @@ class UserProduct(models.Model):
         verbose_name_plural = (
             UserProductModelConfig.MODEL_VERBOSE_NAME_PLURAL.value
         )
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "product"], name="unique_user_product"
+            )
+        ]
 
     def __str__(self):
         return f"{self.user} - участник продукта {self.product}"
@@ -134,6 +144,11 @@ class UserLesson(models.Model):
         verbose_name_plural = (
             UserLessonModelConfig.MODEL_VERBOSE_NAME_PLURAL.value
         )
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "lesson"], name="unique_user_lesson"
+            )
+        ]
 
     def __str__(self):
         return f"{self.user} - участник урока {self.lesson}"
