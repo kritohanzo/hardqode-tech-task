@@ -9,19 +9,19 @@ Content-Type: application/json
 ###
 
 GET http://127.0.0.1:8000/api/v1/users/me/
-Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
+Authorization: Token 57935bf7041c76090d93d6ec36e8930099882890
 
 ###
 
 GET http://127.0.0.1:8000/api/v1/users/me/products/
-Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
+Authorization: Token 57935bf7041c76090d93d6ec36e8930099882890
 
 ###
 
-GET http://127.0.0.1:8000/api/v1/users/me/products/1/
-Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
+GET http://127.0.0.1:8000/api/v1/users/me/products/10/
+Authorization: Token 57935bf7041c76090d93d6ec36e8930099882890
 
 ###
 
 GET http://127.0.0.1:8000/api/v1/products/
-Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
+Authorization: Token 57935bf7041c76090d93d6ec36e8930099882890

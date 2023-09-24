@@ -70,7 +70,7 @@ class ConcreteProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ("product_name", "owner", "lessons")
+        fields = ("id", "product_name", "owner", "lessons")
 
 
 class AllProductSerializer(ConcreteProductSerializer):
@@ -90,6 +90,7 @@ class StatProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
+            "id",
             "product_name",
             "owner",
             "lessons_watched_count",
@@ -99,20 +100,28 @@ class StatProductSerializer(serializers.ModelSerializer):
         )
 
     def get_lessons_watched_count(self, obj):
-        lessons = obj.product_lessons.all()
-        user_lessons = [i.lesson.lesson_users.all() for i in lessons]
+        product_lessons = obj.product_lessons.all()
+        user_lessons = []
+        for product_lesson in product_lessons:
+            for user_lesson in product_lesson.lesson.lesson_users.all():
+                user_lessons.append(user_lesson)
         lesson_watched_count = 0
         for user_lesson in user_lessons:
-            if user_lesson.get().viewed:
+            if user_lesson.viewed:
                 lesson_watched_count += 1
         return lesson_watched_count
 
     def get_amount_of_time_watched(self, obj):
-        lessons = obj.product_lessons.all()
-        user_lessons = [i.lesson.lesson_users.all() for i in lessons]
+        product_lessons = obj.product_lessons.all()
+        user_lessons = [
+            product_lesson.lesson.lesson_users.all()
+            for product_lesson in product_lessons
+        ]
         time_watched = 0
         for user_lesson in user_lessons:
-            time_watched += user_lesson.get().viewing_time
+            time_watched += sum(
+                list(map(lambda x: x.viewing_time, user_lesson))
+            )
         return time_watched
 
     def get_amount_of_students(self, obj):
