@@ -4,3 +4,4 @@ progress==1.6
 drf-yasg==1.21.7
 djoser==2.2.0
 django-admin-autocomplete-filter==0.7.1
+python-dotenv==1.0.0
