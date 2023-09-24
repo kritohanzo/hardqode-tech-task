@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 
 from education.models import (
@@ -7,6 +8,23 @@ from education.models import (
     UserLesson,
     UserProduct,
 )
+
+
+class UserLessonForm(forms.ModelForm):
+    class Meta:
+        model = UserLesson
+        fields = "__all__"
+
+    def clean_viewing_time(self):
+        # do something that validates your data
+        viewing_time = self.cleaned_data["viewing_time"]
+        need_time = self.cleaned_data["lesson"].viewing_duration
+        if viewing_time > need_time:
+            raise forms.ValidationError(
+                "Время просмотра пользователем "
+                "не может быть больше длины видео"
+            )
+        return viewing_time
 
 
 @admin.register(Product)
@@ -43,6 +61,7 @@ class UserProductAdmin(admin.ModelAdmin):
 
 @admin.register(UserLesson)
 class UserLessonAdmin(admin.ModelAdmin):
+    form = UserLessonForm
     list_display = [
         "id",
         "user",
