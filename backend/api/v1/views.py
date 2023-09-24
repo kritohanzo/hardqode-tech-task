@@ -106,5 +106,5 @@ class UserViewSet(
 
 class RetrieveListProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAdminUser]
     serializer_class = StatProductSerializer

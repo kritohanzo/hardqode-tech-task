@@ -17,13 +17,17 @@ def check_viewed(sender, instance, *args, **kwargs):
 def add_to_lesson(sender, instance, *args, **kwargs):
     product_lessons = instance.product.product_lessons.all()
     for product_lesson in product_lessons:
-        UserLesson.objects.get_or_create(user=instance.user, lesson=product_lesson.lesson)
+        UserLesson.objects.get_or_create(
+            user=instance.user, lesson=product_lesson.lesson
+        )
 
 
 @receiver(post_delete, sender=UserProduct)
 def remove_from_lesson(sender, instance, *args, **kwargs):
     product_lessons = instance.product.product_lessons.all()
-    user_products = instance.user.user_products.all().exclude(product=instance.product)
+    user_products = instance.user.user_products.all().exclude(
+        product=instance.product
+    )
     user_lessons = []
 
     for user_product in user_products:
@@ -31,7 +35,7 @@ def remove_from_lesson(sender, instance, *args, **kwargs):
             user_lessons.append(user_product_lesson.lesson)
 
     for product_lesson in product_lessons:
-        if not product_lesson.lesson in user_lessons:
+        if product_lesson.lesson not in user_lessons:
             user_lesson = UserLesson.objects.filter(
                 user=instance.user, lesson=product_lesson.lesson
             )
