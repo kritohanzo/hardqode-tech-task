@@ -5,6 +5,8 @@ from users.models import User
 
 
 class ShortLessonSerializer(serializers.ModelSerializer):
+    """Сериализатор для вывода краткой информации об уроке."""
+
     lesson_name = serializers.CharField(source="lesson.name", read_only=True)
     link_to_video = serializers.CharField(
         source="lesson.link_to_video", read_only=True
@@ -39,6 +41,8 @@ class ShortLessonSerializer(serializers.ModelSerializer):
 
 
 class FullLessonSerializer(ShortLessonSerializer):
+    """Сериализатор для вывода полной информации об уроке."""
+
     date_of_last_viewing = serializers.SerializerMethodField()
 
     class Meta:
@@ -60,6 +64,8 @@ class FullLessonSerializer(ShortLessonSerializer):
 
 
 class ConcreteProductSerializer(serializers.ModelSerializer):
+    """Сериализатор для вывода конкретного продукта."""
+
     product_name = serializers.CharField(source="product.name", read_only=True)
     owner = serializers.CharField(
         source="product.owner.username", read_only=True
@@ -74,12 +80,16 @@ class ConcreteProductSerializer(serializers.ModelSerializer):
 
 
 class AllProductSerializer(ConcreteProductSerializer):
+    """Сериализатор для вывода всех продуктов."""
+
     lessons = ShortLessonSerializer(
         source="product.product_lessons", many=True, read_only=True
     )
 
 
 class StatProductSerializer(serializers.ModelSerializer):
+    """Сериализатор для вывода статистики продуктов."""
+
     product_name = serializers.CharField(source="name", read_only=True)
     owner = serializers.CharField(source="owner.username", read_only=True)
     lessons_watched_count = serializers.SerializerMethodField()
@@ -100,7 +110,7 @@ class StatProductSerializer(serializers.ModelSerializer):
         )
 
     def get_lessons_watched_count(self, obj):
-        product_lessons = obj.product_lessons.all()
+        product_lessons = obj.product_lessons.select_related("lesson")
         user_lessons = []
         for product_lesson in product_lessons:
             for user_lesson in product_lesson.lesson.lesson_users.all():
@@ -112,7 +122,7 @@ class StatProductSerializer(serializers.ModelSerializer):
         return lesson_watched_count
 
     def get_amount_of_time_watched(self, obj):
-        product_lessons = obj.product_lessons.all()
+        product_lessons = obj.product_lessons.select_related("lesson")
         user_lessons = [
             product_lesson.lesson.lesson_users.all()
             for product_lesson in product_lessons

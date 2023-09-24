@@ -164,7 +164,7 @@ class AllProductsAPITest(APITestCase):
     def test_auth_can_get_his_products(self):
         """
         Проверяем, что аутентифицированный пользователь
-        может уничтожить свой токен.
+        может посмотреть свои продукты.
         """
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         response = self.client.get("/api/v1/users/me/products/")
@@ -256,7 +256,7 @@ class ConcreteProductAPITest(APITestCase):
     def test_auth_can_get_his_concrete_products(self):
         """
         Проверяем, что аутентифицированный пользователь
-        может уничтожить свой токен.
+        может посмотреть свой конкретный продукт.
         """
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         response = self.client.get("/api/v1/users/me/products/1/")
@@ -301,7 +301,7 @@ class ConcreteProductAPITest(APITestCase):
     def test_noauth_cant_get_his_concrete_products(self):
         """
         Проверяем, что неаутентифицированный
-        пользователь не может посмотреть свои продукты.
+        пользователь не может посмотреть свой конкретный продукт.
         """
         response = self.client.get("/api/v1/users/me/products/1/")
         self.assertEqual(
@@ -367,8 +367,6 @@ class StatProductAPITest(APITestCase):
                 "product_purchase_percentage": "100.0%",
             }
         ]
-        print(expected_data)
-        print(response.data.get("results"))
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK,

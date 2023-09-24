@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 
+from core.filters import LessonFilter, ProductFilter, UserFilter
 from education.models import (
     Lesson,
     LessonProduct,
@@ -48,6 +49,7 @@ class LessonProductAdmin(admin.ModelAdmin):
     list_display = ["id", "product", "lesson"]
     list_display_links = ["id", "product", "lesson"]
     search_fields = ["product", "lesson"]
+    list_filter = [ProductFilter, LessonFilter]
     empty_value_display = "-"
 
 
@@ -56,6 +58,7 @@ class UserProductAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "product"]
     list_display_links = ["id", "user", "product"]
     search_fields = ["user", "product"]
+    list_filter = [UserFilter, ProductFilter]
     empty_value_display = "-"
 
 
@@ -72,4 +75,5 @@ class UserLessonAdmin(admin.ModelAdmin):
     ]
     list_display_links = ["id", "user", "lesson"]
     search_fields = ["user", "lesson"]
+    list_filter = [UserFilter, LessonFilter]
     empty_value_display = "-"

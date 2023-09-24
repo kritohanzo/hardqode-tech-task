@@ -2,6 +2,8 @@ from enum import Enum
 
 
 class UserModelConfig(Enum):
+    """Конфигурация модели пользователя."""
+
     USERNAME_MAX_LENGTH = 16
     USERNAME_VERBOSE_NAME = "Логин"
     EMAIL_MAX_LENGTH = 256
@@ -12,6 +14,8 @@ class UserModelConfig(Enum):
 
 
 class PruductModelConfig(Enum):
+    """Конфигурация модели продукта."""
+
     NAME_MAX_LENGTH = 256
     NAME_VERBOSE_NAME = "Название"
     OWNER_VERBOSE_NAME = "Владалец"
@@ -21,6 +25,8 @@ class PruductModelConfig(Enum):
 
 
 class LessonModelConfig(Enum):
+    """Конфигурация модели урока."""
+
     NAME_MAX_LENGTH = 256
     NAME_VERBOSE_NAME = "Название"
     LINK_TO_VIDEO_VERBOSE_NAME = "Ссылка на видео"
@@ -30,6 +36,8 @@ class LessonModelConfig(Enum):
 
 
 class LessonProductModelConfig(Enum):
+    """Конфигурация модели урока-продукта."""
+
     PRODUCT_VERBOSE_NAME = "Продукт"
     PRODUCT_RELATED_NAME = "product_lessons"
     LESSON_VERBOSE_NAME = "Урок"
@@ -39,6 +47,8 @@ class LessonProductModelConfig(Enum):
 
 
 class UserProductModelConfig(Enum):
+    """Конфигурация модели пользователя-продукта."""
+
     USER_VERBOSE_NAME = "Пользователь"
     USER_RELATED_NAME = "user_products"
     PRODUCT_VERBOSE_NAME = "Продукт"
@@ -48,6 +58,8 @@ class UserProductModelConfig(Enum):
 
 
 class UserLessonModelConfig(Enum):
+    """Конфигурация модели пользователя-урока."""
+
     USER_VERBOSE_NAME = "Пользователь"
     USER_RELATED_NAME = "user_lessons"
     LESSON_VERBOSE_NAME = "Урок"

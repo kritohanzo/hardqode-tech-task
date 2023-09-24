@@ -58,7 +58,9 @@ class UserViewSet(
             self.action == "get_all_products"
             or self.action == "get_concrete_product"
         ):
-            return self.request.user.user_products.all()
+            return self.request.user.user_products.select_related(
+                "user", "product"
+            )
         return super().get_queryset()
 
     def get_permissions(self):
@@ -104,7 +106,11 @@ class UserViewSet(
         return self.retrieve(request, *args, **kwargs)
 
 
-class RetrieveListProductViewSet(viewsets.ModelViewSet):
+class RetrieveListProductViewSet(
+    mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    """Вьюсет для вывода статистики-информации об имеющиъся продуктах."""
+
     queryset = Product.objects.all()
     permission_classes = [permissions.IsAdminUser]
     serializer_class = StatProductSerializer

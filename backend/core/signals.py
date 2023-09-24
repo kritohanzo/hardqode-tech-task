@@ -6,6 +6,7 @@ from education.models import UserLesson, UserProduct
 
 @receiver(pre_save, sender=UserLesson)
 def check_viewed(sender, instance, *args, **kwargs):
+    """Сигнал для автоматического проставления статуса 'Просмотрено'."""
     need_time = instance.lesson.viewing_duration
     viewing_time = instance.viewing_time
     if viewing_time / need_time > 0.8:
@@ -15,7 +16,8 @@ def check_viewed(sender, instance, *args, **kwargs):
 
 @receiver(post_save, sender=UserProduct)
 def add_to_lesson(sender, instance, *args, **kwargs):
-    product_lessons = instance.product.product_lessons.all()
+    """Сигнал для автоматического добавления пользователей в уроки."""
+    product_lessons = instance.product.product_lessons.select_related("lesson")
     for product_lesson in product_lessons:
         UserLesson.objects.get_or_create(
             user=instance.user, lesson=product_lesson.lesson
@@ -24,14 +26,17 @@ def add_to_lesson(sender, instance, *args, **kwargs):
 
 @receiver(post_delete, sender=UserProduct)
 def remove_from_lesson(sender, instance, *args, **kwargs):
+    """Сигнал для автоматического удаления пользователей из уроков."""
     product_lessons = instance.product.product_lessons.all()
-    user_products = instance.user.user_products.all().exclude(
-        product=instance.product
-    )
+    user_products = instance.user.user_products.select_related(
+        "product"
+    ).exclude(product=instance.product)
     user_lessons = []
 
     for user_product in user_products:
-        for user_product_lesson in user_product.product.product_lessons.all():
+        for (
+            user_product_lesson
+        ) in user_product.product.product_lessons.select_related("lesson"):
             user_lessons.append(user_product_lesson.lesson)
 
     for product_lesson in product_lessons:
