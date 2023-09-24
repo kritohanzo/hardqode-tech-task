@@ -1,0 +1,27 @@
+POST http://127.0.0.1:8000/api/v1/auth/login/
+Content-Type: application/json
+
+{
+    "username": "kritohanzo",
+    "password": "123"
+}
+
+###
+
+GET http://127.0.0.1:8000/api/v1/users/me/
+Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
+
+###
+
+GET http://127.0.0.1:8000/api/v1/users/me/products/
+Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
+
+###
+
+GET http://127.0.0.1:8000/api/v1/users/me/products/1/
+Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
+
+###
+
+GET http://127.0.0.1:8000/api/v1/products/
+Authorization: Token f50f7def855e50b2e34c967819d3b6689d024b92
