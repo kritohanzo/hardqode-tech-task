@@ -16,18 +16,23 @@ def check_viewed(sender, instance, *args, **kwargs):
 @receiver(post_save, sender=UserProduct)
 def add_to_lesson(sender, instance, *args, **kwargs):
     product_lessons = instance.product.product_lessons.all()
-    user_lessons = [
-        UserLesson(user=instance.user, lesson=product_lesson.lesson)
-        for product_lesson in product_lessons
-    ]
-    UserLesson.objects.bulk_create(user_lessons)
+    for product_lesson in product_lessons:
+        UserLesson.objects.get_or_create(user=instance.user, lesson=product_lesson.lesson)
 
 
 @receiver(post_delete, sender=UserProduct)
-def add_to_lesson(sender, instance, *args, **kwargs):
+def remove_from_lesson(sender, instance, *args, **kwargs):
     product_lessons = instance.product.product_lessons.all()
+    user_products = instance.user.user_products.all().exclude(product=instance.product)
+    user_lessons = []
+
+    for user_product in user_products:
+        for user_product_lesson in user_product.product.product_lessons.all():
+            user_lessons.append(user_product_lesson.lesson)
+
     for product_lesson in product_lessons:
-        user_lesson = UserLesson.objects.filter(
-            user=instance.user, lesson=product_lesson.lesson
-        )
-        user_lesson.delete()
+        if not product_lesson.lesson in user_lessons:
+            user_lesson = UserLesson.objects.filter(
+                user=instance.user, lesson=product_lesson.lesson
+            )
+            user_lesson.delete()

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "username": "painkiller",
+        "email": "painkiller@gmail.com",
+        "password": "painkiller_password"
+    },
+    {
+        "id": 2,
+        "username": "revision",
+        "email": "revision@gmail.com",
+        "password": "revision_password"
+    },
+    {
+        "id": 3,
+        "username": "nintendo",
+        "email": "nintendo@gmail.com",
+        "password": "nintendo_password"
+    }
+]
