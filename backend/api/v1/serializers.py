@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from education.models import Product, Lesson, UserProduct, UserLesson
-from django.db.models import Avg, Count, Min, Sum
+
+from education.models import Lesson, Product, UserLesson
 from users.models import User
 
 

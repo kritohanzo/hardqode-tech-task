@@ -1,14 +1,17 @@
-from rest_framework import mixins
-from rest_framework import viewsets
-from rest_framework.serializers import Serializer
 from typing import Optional, Type
-from rest_framework import permissions
-from users.models import User
-from rest_framework.decorators import action
+
 from djoser import serializers
-from api.v1.serializers import ConcreteProductSerializer, AllProductSerializer, StatProductSerializer
-from education.models import Product, Lesson, UserProduct, UserLesson
-from django.shortcuts import get_object_or_404
+from rest_framework import mixins, permissions, viewsets
+from rest_framework.decorators import action
+from rest_framework.serializers import Serializer
+
+from api.v1.serializers import (
+    AllProductSerializer,
+    ConcreteProductSerializer,
+    StatProductSerializer,
+)
+from education.models import Product
+from users.models import User
 
 
 class MultiSerializerViewSetMixin:
@@ -99,6 +102,7 @@ class UserViewSet(
     )
     def get_concrete_product(self, request, pk, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+
 
 class RetrieveListProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
